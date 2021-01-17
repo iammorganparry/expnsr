@@ -15,7 +15,7 @@ function createMainWindow() {
     width: 1400, 
     height: 800,
     transparent: true,
-    // frame: false,
+    frame: false,
     titleBarStyle: 'hiddenInset', 
   })
 

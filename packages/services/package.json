@@ -1,0 +1,12 @@
+{
+  "name": "@expnsr/services",
+  "version": "1.0.0",
+  "description": "services for expnsr",
+  "main": "index.ts",
+  "author": "Morgan Parry",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@supabase/supabase-js": "^1.3.1"
+  }
+}

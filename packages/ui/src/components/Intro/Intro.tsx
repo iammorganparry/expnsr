@@ -1,6 +1,7 @@
 import { GetStartedBtn, StyledContainer, StyledFooter, StyledGetStarted, StyledIllustration, TagLine, StyledLogo } from "./Intro.style"
 //@ts-ignore
 import IntroSVG from '@/assets/intro.svg'
+import { GoogleBtn } from "./Auth/GoogleSSO/Google"
 export const Intro = () => {
 
     return (
@@ -15,6 +16,7 @@ export const Intro = () => {
                 <GetStartedBtn>
                     Get Started
                 </GetStartedBtn>
+                <GoogleBtn />
             </StyledGetStarted>
             {/* <StyledFooter> */}
                 <StyledLogo>

@@ -2,7 +2,7 @@
   "name": "@expnsr/electron",
   "version": "0.1.0",
   "scripts": {
-    "dev": "electron-webpack dev",
+    "dev": "electron-webpack dev --enable-transparent-visuals --disable-gpu",
     "compile": "electron-webpack",
     "dist": "yarn compile && electron-builder",
     "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null"

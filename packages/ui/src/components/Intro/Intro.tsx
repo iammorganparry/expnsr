@@ -1,4 +1,4 @@
-import { GetStartedBtn, StyledContainer, StyledGetStarted, StyledIllustration, TagLine } from "./Intro.style"
+import { GetStartedBtn, StyledContainer, StyledFooter, StyledGetStarted, StyledIllustration, TagLine, StyledLogo } from "./Intro.style"
 //@ts-ignore
 import IntroSVG from '@/assets/intro.svg'
 export const Intro = () => {
@@ -16,6 +16,11 @@ export const Intro = () => {
                     Get Started
                 </GetStartedBtn>
             </StyledGetStarted>
+            {/* <StyledFooter> */}
+                <StyledLogo>
+                    expnsr
+                </StyledLogo>
+            {/* </StyledFooter> */}
         </StyledContainer>
     )
 }

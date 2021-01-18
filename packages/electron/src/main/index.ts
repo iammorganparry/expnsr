@@ -13,10 +13,14 @@ function createMainWindow() {
   const window = new BrowserWindow({
     webPreferences: {nodeIntegration: true}, 
     width: 1400, 
+    center: true,
     height: 800,
-    transparent: true,
     frame: false,
+    minWidth: 1200,
+    minHeight: 700,
+    backgroundColor: '#00ffffff',
     titleBarStyle: 'hiddenInset', 
+    transparent: true,
   })
 
   if (isDevelopment) {
@@ -24,7 +28,7 @@ function createMainWindow() {
   }
 
   if (isDevelopment) {
-    window.loadURL(`http:localhost:3000`)
+    window.loadURL(`http://localhost:3000`)
   }
   else {
     window.loadURL(formatUrl({
@@ -47,6 +51,7 @@ function createMainWindow() {
 
   return window
 }
+app.disableHardwareAcceleration();
 
 // quit application when all windows are closed
 app.on('window-all-closed', () => {

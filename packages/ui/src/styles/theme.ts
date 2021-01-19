@@ -9,6 +9,10 @@ export default {
         common: {
             white: '#fff',
             black: '#000'
+        },
+        greys: {
+            light: '#eee',
+            main: '#CBCBCB'
         }
     },
     spacing: (value: number) => `${value * 8}px`

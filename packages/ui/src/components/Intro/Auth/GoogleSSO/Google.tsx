@@ -3,16 +3,12 @@ import supabase from '@expnsr/services/Supabase'
 export const GoogleBtn = () => {
 
     const success = async (event: React.SyntheticEvent) => {
-        event.preventDefault()
-        let { user, error } = await supabase.auth.signIn({
+        event.persist()
+        supabase.auth.signIn({
             provider: 'google',
 
           })
-        if(error) {
-            console.log(error)
-        } else {
-            alert(`Hello ${user.email}`)
-        }
+        .then(({ user, error}) => alert(user.email))
     }
 
 

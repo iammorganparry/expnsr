@@ -9,6 +9,7 @@ type SpacingFn = (value: number) => string
 
 declare module 'styled-components' {
   export interface DefaultTheme {
+    shadows: string[]
     borderRadius?: string
     spacing: SpacingFn
     palette: {

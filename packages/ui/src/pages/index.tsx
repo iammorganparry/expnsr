@@ -1,4 +1,4 @@
-import { Intro } from '@/components/Intro/Intro';
+import { Login } from '@/components/Login/Login';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 
@@ -9,7 +9,7 @@ export default function Home() {
         <title>expnsr - expenses taken care of</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Intro />
+      <Login />
     </div>
   );
 }

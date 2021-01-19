@@ -1,13 +1,5 @@
 import styled, { css } from 'styled-components'
 
-export const StyledContainer = styled.div`
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-wrap: wrap;
-    overflow: hidden;
-`
-
 const flex = css`
     display: flex;
     align-items: center;
@@ -28,7 +20,6 @@ export const StyledIllustration = styled.section`
 export const StyledGetStarted = styled.section`
     width: 40%;
     flex-direction: column;
-    text-align: center;
     ${flex};
 `
 
@@ -45,8 +36,9 @@ filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 `}`
 
 export const TagLine = styled.h2`${({ theme }) => css`
-font-weight: normal;
-margin-bottom: theme.spacing(2);
+    font-weight: normal;
+    text-align: center;
+    margin-bottom: theme.spacing(2);
 `}
 `
 

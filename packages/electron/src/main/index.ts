@@ -15,14 +15,14 @@ function createMainWindow() {
     width: 1400, 
     center: true,
     height: 800,
-    frame: true,
+    frame: false,
     resizable: true,
     minWidth: 1200,
     minHeight: 700,
     darkTheme: true,
     backgroundColor: '#00ffffff',
     titleBarStyle: 'hiddenInset', 
-    transparent: false,
+    transparent: true,
   })
 
   if (isDevelopment) {

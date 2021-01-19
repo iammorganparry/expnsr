@@ -1,11 +1,12 @@
-import { GetStartedBtn, StyledContainer, StyledFooter, StyledGetStarted, StyledIllustration, TagLine, StyledLogo } from "./Intro.style"
+import { StyledGetStarted, StyledIllustration, TagLine, StyledLogo } from "./Login.style"
 //@ts-ignore
 import IntroSVG from '@/assets/intro.svg'
-import { GoogleBtn } from "./Auth/GoogleSSO/Google"
-export const Intro = () => {
+import { LoginForm } from "./Forms/LoginForm/LoginForm"
+import { StyledFullPageContainer } from "../common/FullPageContainer/FullPageContainer.styles"
+export const Login = () => {
 
     return (
-        <StyledContainer>
+        <StyledFullPageContainer>
             <StyledIllustration>
                 <IntroSVG />
             </StyledIllustration>
@@ -13,16 +14,13 @@ export const Intro = () => {
                 <TagLine>
                     Lets take care of those expenses
                 </TagLine>
-                <GetStartedBtn>
-                    Get Started
-                </GetStartedBtn>
-                <GoogleBtn />
+                <LoginForm />
             </StyledGetStarted>
             {/* <StyledFooter> */}
                 <StyledLogo>
                     expnsr
                 </StyledLogo>
             {/* </StyledFooter> */}
-        </StyledContainer>
+        </StyledFullPageContainer>
     )
 }

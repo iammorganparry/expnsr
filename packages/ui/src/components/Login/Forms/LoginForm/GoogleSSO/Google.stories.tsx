@@ -3,16 +3,16 @@
 import React, { ComponentProps } from 'react';
 import { Story } from '@storybook/react/types-6-0';
 
-import { LoginForm } from './LoginForm';
+import { GoogleBtn } from './Google';
 
 // This default export determines where your story goes in the story list
 export default {
-  title: 'Login Form',
-  component: LoginForm,
+  title: 'Goolge SSO Button',
+  component: GoogleBtn,
 };
 
-const Template: Story<ComponentProps<typeof LoginForm>> = (args) => (
-  <LoginForm {...args} />
+const Template: Story<ComponentProps<typeof GoogleBtn>> = (args) => (
+  <GoogleBtn {...args} />
 );
 
 export const Rendered = Template.bind({});

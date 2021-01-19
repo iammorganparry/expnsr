@@ -1,0 +1,9 @@
+{
+  "name": "@expnsr/types",
+  "version": "1.0.0",
+  "description": "Types for the project",
+  "main": "index.ts",
+  "author": "Morgan Parry",
+  "license": "MIT",
+  "private": true
+}

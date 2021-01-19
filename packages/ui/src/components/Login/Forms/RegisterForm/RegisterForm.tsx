@@ -9,8 +9,8 @@ export const RegisterForm = () => {
     return (
         <StyledForm onSubmit={handleSubmit}>
         <FormGroup>
-        <TextInput onChange={handleChange('email')} label='Email' type='email' />
-        <TextInput onChange={handleChange('password')} label='Password' type='password' />
+        <TextInput data-testid='signUp-email' onChange={handleChange('email')} label='Email' type='email' />
+        <TextInput data-testid='signUp-password' onChange={handleChange('password')} label='Password' type='password' />
         <StyledRegisterButton text='Sign up!' type='submit' />
         </FormGroup>
         </StyledForm>

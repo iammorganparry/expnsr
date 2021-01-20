@@ -8,7 +8,7 @@ export default function MyApp({ Component, pageProps }) {
   return (
   <ThemeProvider theme={theme}>
     <AuthorizedUserProvider>
-      <ToastProvider placement='top-center'>
+      <ToastProvider autoDismiss placement='top-center'>
         <Component {...pageProps} />
       </ToastProvider>
     </AuthorizedUserProvider>

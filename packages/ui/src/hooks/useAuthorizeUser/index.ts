@@ -1,8 +1,8 @@
 import { useContext, useState, useEffect, useRef } from "react"
 import supabase from '@expnsr/services/Supabase'
-import { User } from '@supabase/supabase-js'
 import { AuthorizedUserContext } from './context'
 import { useToasts } from 'react-toast-notifications'
+// import { useRouter } from 'next/router'
 
 export * from './context'
 
@@ -15,6 +15,7 @@ interface FormState {
 export const useAuthorizeUser = (type: AuthTypes) => {
     const [userContext, setUserContext] = useContext(AuthorizedUserContext)
     const { addToast } = useToasts()
+    // const router = useRouter()
     const [formState, setFormState] = useState<FormState>({
         email: '',
         password: ''
@@ -33,6 +34,7 @@ export const useAuthorizeUser = (type: AuthTypes) => {
           })
         if(user) {
             addToast(successMessage, { appearance: 'success'})
+            // router.push('/')
         }
         if(error) {
             addToast(error.message, { appearance: 'error'})

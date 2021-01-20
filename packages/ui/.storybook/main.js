@@ -7,13 +7,9 @@ module.exports = {
   ],
   "addons": [
     "@storybook/addon-links",
-    "@storybook/addon-essentials"
+    "@storybook/addon-essentials",
+    "storybook-addon-next-router"
   ],
-  resolve: {
-    alias:{
-      '@': '../src/'
-    }
-  },
   webpackFinal: async (config, { configType }) => {
     // Add SVGR Loader
     // ========================================================
@@ -22,6 +18,10 @@ module.exports = {
     const assetLoader = {
       loader: assetRule.loader,
       options: assetRule.options || assetRule.query
+    };
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "@": path.resolve(__dirname, "../"),
     };
 
     // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'

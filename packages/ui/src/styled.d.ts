@@ -4,6 +4,7 @@ interface IPalette {
   main: string
   contrastText?: string
   light?: string
+  medium?: string
 }
 type SpacingFn = (value: number) => string
 

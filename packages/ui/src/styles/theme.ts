@@ -12,7 +12,8 @@ export default {
         },
         greys: {
             light: '#eee',
-            main: '#CBCBCB'
+            main: '#CBCBCB',
+            medium: '#C4C4C4'
         }
     },
     shadows: [

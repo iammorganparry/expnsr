@@ -18,6 +18,8 @@ export const LoginForm = () => {
                 <StyledLoginButton text='Log In' type='submit' />
                 <StyledSubText>
                     Dont have an account? <StyledLink href='/sign-up'>Sign up</StyledLink>
+                </StyledSubText>
+                <StyledSubText>
                 <Link href="{{ .ConfirmationURL }}">Forgot Password?</Link>
                 </StyledSubText>
             </FormGroup>

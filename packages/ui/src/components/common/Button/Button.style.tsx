@@ -1,12 +1,13 @@
-import { ButtonProps } from "./Button";
-import styled, { css, DefaultTheme } from "styled-components";
+import { ButtonProps } from './Button';
+import styled, { css, DefaultTheme } from 'styled-components';
 
 interface StyledButtonProps extends Omit<ButtonProps, 'text'> {
-    theme: DefaultTheme
+  theme: DefaultTheme;
 }
-export const StyledButton = styled.button`${({ theme, width, height }: StyledButtonProps) => css`
-    width: ${ width ? `${width}px` : '100%'};
-    height: ${ height ? `${height}px` : '50px'};
+export const StyledButton = styled.button`
+  ${({ theme, width, height }: StyledButtonProps) => css`
+    width: ${width ? `${width}px` : '100%'};
+    height: ${height ? `${height}px` : '50px'};
     background: ${theme.palette.primary.main};
     color: ${theme.palette.common.white};
     text-transform: uppercase;
@@ -18,8 +19,9 @@ export const StyledButton = styled.button`${({ theme, width, height }: StyledBut
     box-shadow: ${theme.shadows[2]};
     transition: all 0.35s ease;
     :hover {
-        box-shadow: ${theme.shadows[6]};
-        transform: scale(1.02);
-        cursor: pointer;
+      box-shadow: ${theme.shadows[6]};
+      transform: scale(1.02);
+      cursor: pointer;
     }
-`}`
+  `}
+`;

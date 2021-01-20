@@ -17,13 +17,12 @@ const Template: Story<ComponentProps<typeof Button>> = (args) => (
 
 export const Rendered = Template.bind({});
 Rendered.args = {
-text: 'Submit',
-width: 200,
-height: 50
+  text: 'Submit',
+  width: 200,
+  height: 50,
 };
 
-
-export const Disabled = Template.bind({})
-Disabled.args ={
-  text: 'Submit'
-}
+export const Disabled = Template.bind({});
+Disabled.args = {
+  text: 'Submit',
+};

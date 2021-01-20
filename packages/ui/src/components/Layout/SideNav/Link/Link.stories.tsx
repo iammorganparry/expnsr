@@ -17,14 +17,15 @@ const Template: Story<ComponentProps<typeof Link>> = (args) => (
 
 export const Selected = Template.bind({});
 Selected.args = {
-    link: {
-        href: '/'
-    }
+  link: {
+    href: '/',
+    name: 'Home',
+  },
 };
 
 export const NotSelected = Template.bind({});
 NotSelected.args = {
-    link: {
-        href: '/foo'
-    }
+  link: {
+    href: '/foo',
+  },
 };

@@ -16,6 +16,4 @@ const Template: Story<ComponentProps<typeof SideNav>> = (args) => (
 );
 
 export const Open = Template.bind({});
-Open.args = {
-
-};
+Open.args = {};

@@ -2,12 +2,13 @@
 
 import React from "react";
 import { ThemeProvider } from 'styled-components';
-import theme  from '../src/styles/theme'
+import {theme}  from '../src/styles/theme'
 import '../src/styles/global.css';
 import { ToastProvider } from "react-toast-notifications";
 import { withNextRouter } from 'storybook-addon-next-router';
 import { addDecorator } from '@storybook/react';
- 
+import { ThemeProvider as MaterialProvider, StylesProvider } from '@material-ui/styles';
+
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
 }
@@ -23,10 +24,14 @@ addDecorator(
 
 export const decorators = [
   (Story) => (
-    <ThemeProvider theme={theme}>
+    <StylesProvider injectFirst>
+  <MaterialProvider theme={theme}>
+  <ThemeProvider theme={theme}>
       <ToastProvider placement='top-center' autoDismiss>
         <Story />
       </ToastProvider>
     </ThemeProvider>
+    </MaterialProvider>
+    </StylesProvider>
   ),
 ];

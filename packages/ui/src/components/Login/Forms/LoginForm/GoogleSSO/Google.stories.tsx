@@ -16,11 +16,7 @@ const Template: Story<ComponentProps<typeof GoogleBtn>> = (args) => (
 );
 
 export const Rendered = Template.bind({});
-Rendered.args = {
+Rendered.args = {};
 
-};
-
-export const Disabled = Template.bind({})
-Disabled.args ={
-
-}
+export const Disabled = Template.bind({});
+Disabled.args = {};

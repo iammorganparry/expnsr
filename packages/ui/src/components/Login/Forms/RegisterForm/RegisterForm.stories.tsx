@@ -16,6 +16,4 @@ const Template: Story<ComponentProps<typeof RegisterForm>> = (args) => (
 );
 
 export const Rendered = Template.bind({});
-Rendered.args = {
-
-};
+Rendered.args = {};

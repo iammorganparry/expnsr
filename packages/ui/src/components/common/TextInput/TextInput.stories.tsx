@@ -17,14 +17,14 @@ const Template: Story<ComponentProps<typeof TextInput>> = (args) => (
 
 export const Rendered = Template.bind({});
 Rendered.args = {
-label: 'Email',
-type: 'email',
-placeholder: 'john@doe.com'
-};
-
-export const Disabled = Template.bind({})
-Disabled.args ={
   label: 'Email',
   type: 'email',
-  disabled: true
-}
+  placeholder: 'john@doe.com',
+};
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  label: 'Email',
+  type: 'email',
+  disabled: true,
+};

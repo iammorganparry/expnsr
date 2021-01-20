@@ -1,12 +1,14 @@
-export const Layout = ({children}) => {
+import { Content } from './Content/Content';
+import { LayoutContainer } from './Layout.style';
+import { SideNav } from './SideNav/SideNav';
+import { TopNav } from './TopNav/TopNav';
 
-    return (
-        <LayoutContainer>
-            <Topbar />
-            <SideNav />
-            <Content>
-                {children}
-            </Content>
-        </LayoutContainer>
-    )
-}
+export const Layout = ({ children }) => {
+  return (
+      <>
+      <TopNav />
+      <SideNav />
+      <Content>{children}</Content>
+      </>
+  );
+};

@@ -23,6 +23,10 @@ export const StyledLink = styled.a`
     background-color: ${selected ? '#0000000a': 'none'};
     align-items: center;
     transition: all 0.35s ease;
+    svg {
+      margin-right: 8px;
+      font-size: 20px;
+    }
     &:hover {
       color: ${theme.palette.primary.main};
       background: '#ffffff78';

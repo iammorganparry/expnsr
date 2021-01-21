@@ -11,7 +11,10 @@ export const Link = ({ link }: LinkProps) => {
   const isSelected = router.pathname === link.href;
   return (
     <NextLink href={link.href} passHref>
-      <StyledLink selected={isSelected}>{link.name}</StyledLink>
+      <StyledLink selected={isSelected}>
+        {link.Icon && <link.Icon />}
+        {link.name}
+        </StyledLink>
     </NextLink>
   );
 };

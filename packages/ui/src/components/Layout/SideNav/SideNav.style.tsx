@@ -13,3 +13,11 @@ export const StyledSideNav = styled.nav`
     padding-top: ${theme.spacing(4)};
   `}
 `;
+
+
+export const RouteContainer = styled.ul`
+  margin-top: 100px;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+`

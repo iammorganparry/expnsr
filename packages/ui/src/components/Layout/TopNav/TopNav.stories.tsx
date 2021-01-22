@@ -16,5 +16,4 @@ const Template: Story<ComponentProps<typeof TopNav>> = (args) => (
 );
 
 export const Rendered = Template.bind({});
-Rendered.args = {
-};
+Rendered.args = {};

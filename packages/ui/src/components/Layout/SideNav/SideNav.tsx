@@ -6,9 +6,9 @@ export const SideNav = () => {
   return (
     <StyledSideNav>
       <RouteContainer>
-      {routes.map((route, index) => (
-        <Link key={index} link={route} />
-      ))}
+        {routes.map((route, index) => (
+          <Link key={index} link={route} />
+        ))}
       </RouteContainer>
     </StyledSideNav>
   );

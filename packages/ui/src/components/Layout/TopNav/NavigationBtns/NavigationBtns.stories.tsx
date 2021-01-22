@@ -17,8 +17,8 @@ const Template: Story<ComponentProps<typeof NavigationBtns>> = (args) => (
 
 export const Rendered = Template.bind({});
 Rendered.args = {
-    btnConfig: [
-        { route: '/', icon: <div /> },
-        { route: '/', icon: <div /> },
-    ]
+  btnConfig: [
+    { route: '/', icon: <div /> },
+    { route: '/', icon: <div /> },
+  ],
 };

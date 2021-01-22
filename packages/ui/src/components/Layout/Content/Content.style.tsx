@@ -8,10 +8,10 @@ export const StyledContent = styled.section`
     border-top-left-radius: 50px;
     border-bottom-left-radius: 50px;
     background: ${theme.palette.background.paper};
-   `}
+  `}
 `;
 
 export const ChildrenClear = styled.div`
-    margin-left: 60px;
-    margin-top: 60px;
-`
+  margin-left: 60px;
+  margin-top: 60px;
+`;

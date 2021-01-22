@@ -13,8 +13,8 @@ export const NavigationBtns = ({ btnConfig }: NavigationBtnsProps) => {
 
     return (
         <StyledContainer>
-            {btnConfig.map(config => (
-            <NavBtn route={config.route} disabled Icon={config.Icon} />
+            {btnConfig.map((config, index) => (
+            <NavBtn key={index} route={config.route} disabled Icon={config.Icon} />
             ))}
         </StyledContainer>
     )

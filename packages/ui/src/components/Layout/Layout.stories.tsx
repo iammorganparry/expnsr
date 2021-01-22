@@ -13,7 +13,7 @@ export default {
 
 const Template: Story<ComponentProps<typeof Layout>> = (args) => (
   <Layout {...args}>
-      <h1>TEST</h1>
+    <h1>TEST</h1>
   </Layout>
 );
 

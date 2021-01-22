@@ -16,5 +16,4 @@ const Template: Story<ComponentProps<typeof Avatar>> = (args) => (
 );
 
 export const Rendered = Template.bind({});
-Rendered.args = {
-};
+Rendered.args = {};

@@ -18,5 +18,5 @@ const Template: Story<ComponentProps<typeof NavBtn>> = (args) => (
 
 export const Rendered = Template.bind({});
 Rendered.args = {
-    route: '/'
+  route: '/',
 };

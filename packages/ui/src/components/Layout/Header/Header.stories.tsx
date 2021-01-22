@@ -13,11 +13,11 @@ export default {
 
 const Template: Story<ComponentProps<typeof Header>> = (args) => (
   <Header {...args}>
-      <p>Children</p>
+    <p>Children</p>
   </Header>
 );
 
 export const Rendered = Template.bind({});
 Rendered.args = {
-    title: 'Header'
+  title: 'Header',
 };

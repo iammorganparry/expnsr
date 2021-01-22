@@ -20,7 +20,7 @@ export const StyledLink = styled.a`
     border-left-color: ${selected
       ? theme.palette.primary.main
       : 'rgba(0, 0, 0, 0)'};
-    background-color: ${selected ? '#0000000a': 'none'};
+    background-color: ${selected ? '#0000000a' : 'none'};
     align-items: center;
     transition: all 0.35s ease;
     svg {

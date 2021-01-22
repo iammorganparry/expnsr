@@ -14,10 +14,9 @@ export const StyledSideNav = styled.nav`
   `}
 `;
 
-
 export const RouteContainer = styled.ul`
   margin-top: 100px;
   padding-left: 0;
   display: flex;
   flex-direction: column;
-`
+`;

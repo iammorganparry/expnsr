@@ -19,9 +19,13 @@ export default function MyApp({ Component, pageProps }) {
         <ThemeProvider theme={theme}>
           <AuthorizedUserProvider>
             <ToastProvider autoDismiss placement="top-center">
-            <StyledFullPageContainer>
-              {isLoggedIn ? <Component {...pageProps} /> : <Login {...pageProps} />}
-            </StyledFullPageContainer>
+              <StyledFullPageContainer>
+                {isLoggedIn ? (
+                  <Component {...pageProps} />
+                ) : (
+                  <Login {...pageProps} />
+                )}
+              </StyledFullPageContainer>
             </ToastProvider>
           </AuthorizedUserProvider>
         </ThemeProvider>

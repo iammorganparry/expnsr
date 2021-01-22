@@ -1,7 +1,5 @@
-import { Avatar } from "./Avatar/Avatar"
+import { Avatar } from './Avatar/Avatar';
 
 export const UserMenu = () => {
-    return (
-        <Avatar />
-    )
-}
+  return <Avatar />;
+};

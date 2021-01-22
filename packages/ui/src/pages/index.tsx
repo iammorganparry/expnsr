@@ -13,7 +13,13 @@ export default function Home() {
         <title>expnsr - expenses taken care of</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {isLoggedIn ? <Layout><p>Hello</p></Layout>: <Login />}
+      {isLoggedIn ? (
+        <Layout>
+          <p>Hello</p>
+        </Layout>
+      ) : (
+        <Login />
+      )}
     </StyledFullPageContainer>
   );
 }

@@ -9,9 +9,9 @@ import Head from 'next/head';
 export default function Home() {
   const isLoggedIn = useIsLoggedIn();
   return (
-      <Layout>
-        <Header title='Expenses' />
+    <Layout>
+      <Header title="Expenses" />
       {/* <CreateExpense /> */}
-      </Layout>
+    </Layout>
   );
 }

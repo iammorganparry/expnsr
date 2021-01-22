@@ -14,7 +14,7 @@ export const Link = ({ link }: LinkProps) => {
       <StyledLink selected={isSelected}>
         {link.Icon && <link.Icon />}
         {link.name}
-        </StyledLink>
+      </StyledLink>
     </NextLink>
   );
 };

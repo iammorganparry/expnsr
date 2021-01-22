@@ -1,34 +1,33 @@
 import styled, { css, DefaultTheme } from 'styled-components';
 
 interface StyledInputContainerProps {
-  width?: string
-  theme: DefaultTheme
-
+  width?: string;
+  theme: DefaultTheme;
 }
 export const StyledInputContainer = styled.div`
-  ${({theme, width}: StyledInputContainerProps) => css`
+  ${({ theme, width }: StyledInputContainerProps) => css`
     display: flex;
     flex-direction: column;
     position: relative;
     width: ${width};
   `}
-`
+`;
 
 export const IconContainer = styled.div`
-${({ theme }) => css`
-  position: absolute;
-  left: ${theme.spacing(2)};
-  top: calc(50% - 15px);
+  ${({ theme }) => css`
+    position: absolute;
+    left: ${theme.spacing(2)};
+    top: calc(50% - 15px);
 
-  svg {
-    font-size: 30px;
-    color: ${theme.palette.text.hint};
-  }
-`}
-`
+    svg {
+      font-size: 30px;
+      color: ${theme.palette.text.hint};
+    }
+  `}
+`;
 interface StyledTextInputProps {
-  startPadding?: boolean
-  theme: DefaultTheme
+  startPadding?: boolean;
+  theme: DefaultTheme;
 }
 export const StyledTextInput = styled.input`
   ${({ theme, startPadding }: StyledTextInputProps) => css`

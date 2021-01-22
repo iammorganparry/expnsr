@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const StyledContainer = styled.div`
-    display: flex;
-    margin-left: 50px;
-`
+  display: flex;
+  margin-left: 50px;
+`;

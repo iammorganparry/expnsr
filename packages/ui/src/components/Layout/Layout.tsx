@@ -6,14 +6,14 @@ import { TopNav } from './TopNav/TopNav';
 
 export const Layout: React.FC = ({ children }) => {
   return (
-      <>
-      <Head key='expenses'>
+    <>
+      <Head key="expenses">
         <title>expnsr - expenses taken care of - Create Expense</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <TopNav />
       <SideNav />
       <Content>{children}</Content>
-      </>
+    </>
   );
 };

@@ -5,9 +5,7 @@ export const Expenses = () => {
 
     return (
         <Layout>
-            <Header title='Expenses'>
-                
-            </Header>
+            <Header title='Expenses' />
         </Layout>
     )
 

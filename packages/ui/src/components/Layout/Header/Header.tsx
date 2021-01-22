@@ -2,9 +2,9 @@ import { ChildrenContainer, StyledHeader, StyledHeaderText } from "./Header.styl
 
 interface HeaderProps {
     title: string
-    children: React.ElementType
+    children?: React.FC
 }
-export const Header: React.FC = ({ children, title }: HeaderProps) => {
+export const Header = ({ children, title }: HeaderProps) => {
 
     return (
         <StyledHeader>

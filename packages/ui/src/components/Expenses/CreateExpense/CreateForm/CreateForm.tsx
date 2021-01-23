@@ -21,11 +21,12 @@ import { StyledLabel } from '../../../common/TextInput/TextInput.style';
 import { IoMdRemoveCircleOutline } from 'react-icons/io';
 import { CurrencyInput } from '../../../common/CurrencyInput/CurrencyInput';
 import faker from 'faker';
-import { Button } from '@/components/common/Button/Button';
+import { Button } from '../../../common/Button/Button';
 import { SupabaseTypes } from '@expnsr/types/supabase';
 import supabase from '@expnsr/services/Supabase';
-import { AuthorizedUserContext } from '@/hooks/useAuthorizeUser';
+import { AuthorizedUserContext } from '../../../../hooks/useAuthorizeUser';
 import { useToasts } from 'react-toast-notifications';
+import { ParsedItemsContext } from '@/hooks/useParsedItems/context';
 
 interface Item {
   id: number;
@@ -46,6 +47,7 @@ export const CreateForm = memo(() => {
   const [total, setTotal] = useState<number>(0);
   const [userContext] = useContext(AuthorizedUserContext)
   const {addToast} = useToasts()
+  const [items] = useContext(ParsedItemsContext)
   const generateFakeProduct = useCallback(
     () => faker.commerce.productName(),
     [],
@@ -127,6 +129,9 @@ export const CreateForm = memo(() => {
   );
   const roundTotal = useCallback(() => Math.floor(total), [total]);
   
+
+
+
     const handleFormSubmit = useCallback(async (event: React.SyntheticEvent) => {
       event.preventDefault()
       const { data, error } = await supabase.from<SupabaseTypes['expenses']>('expenses').insert([{receipt_number: formData.receiptNumber, 
@@ -146,7 +151,23 @@ export const CreateForm = memo(() => {
       
     }, [userContext, formData])
 
+
+
+
+  useEffect(() => {
+    setFormData(ps => ({ ...ps, items: [...ps.items, ...items.map((item, index) => ({
+      id: ps.items.length + index,
+      item: item.item, 
+      price: item.price,   
+      pricePlaceholder: generateFakePrice(),
+      itemPlaceholder: generateFakeProduct(), 
+    }))]}))
+  }, [items])
   useEffect(() => setTotal(sumTotals()), [formData]);
+
+
+
+
   return (
     <StyledForm onSubmit={handleFormSubmit}>
       <TextInput

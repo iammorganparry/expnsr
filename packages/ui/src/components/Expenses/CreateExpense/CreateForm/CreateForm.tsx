@@ -25,6 +25,7 @@ import { Button } from '@/components/common/Button/Button';
 import { SupabaseTypes } from '@expnsr/types/supabase';
 import supabase from '@expnsr/services/Supabase';
 import { AuthorizedUserContext } from '@/hooks/useAuthorizeUser';
+import { useToasts } from 'react-toast-notifications';
 
 interface Item {
   id: number;
@@ -44,6 +45,7 @@ interface CreateFormState {
 export const CreateForm = memo(() => {
   const [total, setTotal] = useState<number>(0);
   const [userContext] = useContext(AuthorizedUserContext)
+  const {addToast} = useToasts()
   const generateFakeProduct = useCallback(
     () => faker.commerce.productName(),
     [],
@@ -52,7 +54,7 @@ export const CreateForm = memo(() => {
     () => faker.commerce.price(5.0, 50.0, 2, '£'),
     [],
   );
-  const [formData, setFormData] = useState<CreateFormState>({
+  const initState = {
     receiptNumber: '',
     description: '',
     date: new Date().toDateString(),
@@ -66,7 +68,8 @@ export const CreateForm = memo(() => {
       },
     ],
     totalCost: 0,
-  });
+  }
+  const [formData, setFormData] = useState<CreateFormState>(initState);
   const sumTotals = useCallback(
     () =>
       formData.items.reduce((acc, curr) => {
@@ -132,21 +135,30 @@ export const CreateForm = memo(() => {
         total_cost: String(formData.totalCost),
         user_id: userContext.id
       }])
-      const itemData = await supabase.from<SupabaseTypes['expense_items']>('expense_items').insert(formData.items.map(item => ({ item: item.item, price: item.price, expense_id: data.id, user_id: userContext.id})))
+      const itemData = await supabase.from<SupabaseTypes['expense_items']>('expense_items').insert(formData.items.map(item => ({ item: item.item, price: item.price, expense_id: data?.id, user_id: userContext.id})))
       if(error || itemData.error) {
         alert(error)
+      } else {
+        //reset form
+        addToast('Successfully submitted expense', { appearance: 'success'})
+        setFormData(initState)
       }
-    }, [])
+      
+    }, [userContext, formData])
 
   useEffect(() => setTotal(sumTotals()), [formData]);
   return (
     <StyledForm onSubmit={handleFormSubmit}>
       <TextInput
         StartIcon={BiText}
+        defaultValue=''
+        value={formData.receiptNumber || ''}
         label="Receipt no."
         onChange={handleChange('receiptNumber')}
       />
       <TextInput
+         defaultValue=''
+         value={formData.description || ''}
         StartIcon={BiText}
         label="Description (optional)"
         onChange={handleChange('description')}
@@ -156,6 +168,8 @@ export const CreateForm = memo(() => {
           <StyledItems key={index}>
             <Item>
               <TextInput
+                defaultValue=''
+                value={item.item || ''}
                 onChange={handleItemChange('item', item.id)}
                 placeholder={item.itemPlaceholder}
                 StartIcon={RiShoppingBasketLine}
@@ -164,6 +178,8 @@ export const CreateForm = memo(() => {
             </Item>
             <Price>
               <CurrencyInput
+                defaultValue=''
+                value={item.price || ''}
                 placeholder={item.pricePlaceholder}
                 onChange={handleItemChange('price', item.id)}
                 StartIcon={RiPriceTag2Line}

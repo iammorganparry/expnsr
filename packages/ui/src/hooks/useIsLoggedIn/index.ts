@@ -8,7 +8,7 @@ export const useIsLoggedIn = () => {
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem('supabase.auth.token'));
     if (token) {
-      if(token.expiresAt > Date.now()) {
+      if(token.expiresAt < Date.now()) {
         userContext === null && setUserContext(token.currentSession.user);
         setIsLoggedIn(true);
       } else {

@@ -29,9 +29,7 @@ describe('<CreateForm /> - Expenses', () => {
     expect(btn).toBeInTheDocument();
   });
 
-  it('should be able to remove an item', () => {
-      
-  });
+  it('should be able to remove an item', () => {});
 
   it('should show a grand total that === all item totals', () => {
     fireEvent.change(item, { target: { value: 'Test' } });

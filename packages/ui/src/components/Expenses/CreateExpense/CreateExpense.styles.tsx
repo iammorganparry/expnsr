@@ -8,7 +8,7 @@ export const DropzoneContainer = styled.section`
   ${({ theme }) => css`
     display: flex;
     width: 35%;
-    align-items: center;
+    transition: all 0s.35s linear;
     /* justify-content: center; */
     margin-top: ${theme.spacing(2)};
     /* padding: ${theme.spacing(2)}; */

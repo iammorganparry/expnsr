@@ -10,6 +10,9 @@ module.exports = withCustomBabelConfigFile(
       GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
       SUPABASE_KEY: process.env.SUPABASE_KEY
     },
+    images: {
+      domains: ['https://lh3.googleusercontent.com'],
+    },
     webpack(config, { isServer }) {
       if (!isServer) {
         config.node = {

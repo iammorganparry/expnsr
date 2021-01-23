@@ -37,12 +37,15 @@ export const StyledTextInput = styled.input`
     background: ${theme.palette.grey['200']};
     color: ${theme.palette.common.black};
     border: none;
-    padding-left: ${startPadding ? theme.spacing(6) : '15px'};
+    padding-left: ${startPadding ? theme.spacing(7) : '15px'};
     font-weight: bold;
     font-size: 18px;
     margin-top: ${theme.spacing(1)};
     margin-bottom: ${theme.spacing(3)};
     outline: none;
+    &::placeholder {
+      color: ${theme.palette.divider};
+    }
   `}
 `;
 export const StyledLabel = styled.label`

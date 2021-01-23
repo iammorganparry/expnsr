@@ -35,15 +35,18 @@
     "@svgr/webpack": "^5.5.0",
     "@types/react-dropzone": "^5.1.0",
     "animated-number-react": "^0.1.1",
+    "faker": "^5.1.0",
     "next": "10.0.5",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-dropzone": "^11.2.4",
     "react-google-login": "^5.2.2",
     "react-icons": "^4.1.0",
+    "react-text-mask": "^5.4.3",
     "react-toast-notifications": "^2.4.0",
     "styled-components": "^5.2.1",
-    "tesseract.js": "^2.1.4"
+    "tesseract.js": "^2.1.4",
+    "text-mask-addons": "^3.8.0"
   },
   "jest": {
     "moduleNameMapper": {
@@ -78,6 +81,7 @@
     "@types/node": "14.14.20",
     "@types/react": "17.0.0",
     "@types/react-dom": "17.0.0",
+    "@types/react-text-mask": "^5.4.6",
     "@types/react-toast-notifications": "^2.4.0",
     "@types/styled-components": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "4.13.0",

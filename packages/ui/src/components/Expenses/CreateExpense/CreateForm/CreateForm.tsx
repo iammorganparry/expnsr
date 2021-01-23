@@ -9,99 +9,176 @@ import {
   FormTotals,
   StyledItems,
   StyledDecimal,
-  Total
+  Total,
+  RemovalContainer,
+  StyledIconButton,
+  SubmitContainer
 } from './CreateForm.styles';
 import { RiPriceTag2Line, RiShoppingBasketLine } from 'react-icons/ri';
 import { BiText } from 'react-icons/bi';
-import { useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useContext, useEffect, useState } from 'react';
 import { StyledLabel } from '../../../common/TextInput/TextInput.style';
-import { IconButton } from '@material-ui/core';
-import { IoMdRemoveCircleOutline } from 'react-icons/io'
+import { IoMdRemoveCircleOutline } from 'react-icons/io';
+import { CurrencyInput } from '../../../common/CurrencyInput/CurrencyInput';
+import faker from 'faker';
+import { Button } from '@/components/common/Button/Button';
+import { SupabaseTypes } from '@expnsr/types/supabase';
+import supabase from '@expnsr/services/Supabase';
+import { AuthorizedUserContext } from '@/hooks/useAuthorizeUser';
 
 interface Item {
-    id: number
-    item: string
-    price: number | string
+  id: number;
+  item: string;
+  price: string;
+  itemPlaceholder: string;
+  pricePlaceholder: string;
 }
 
 interface CreateFormState {
-    receiptNumber: string
-    description: string
-    date: string
-    items: Item[]
-    totalCost: number
+  receiptNumber: string;
+  description: string;
+  date: string;
+  items: Item[];
+  totalCost: number;
 }
-export const CreateForm = () => {
-  const [total, setTotal] = useState<number>(0)
+export const CreateForm = memo(() => {
+  const [total, setTotal] = useState<number>(0);
+  const [userContext] = useContext(AuthorizedUserContext)
+  const generateFakeProduct = useCallback(
+    () => faker.commerce.productName(),
+    [],
+  );
+  const generateFakePrice = useCallback(
+    () => faker.commerce.price(5.0, 50.0, 2, '£'),
+    [],
+  );
   const [formData, setFormData] = useState<CreateFormState>({
-      receiptNumber: '',
-      description: '',
-      date: new Date().toDateString(),
-      items:[
-        {
-            id: 0,
-            item: '',
-            price: '',
-          },
-      ],
-      totalCost: 0
-  })
-  const sumTotals = () => formData.items.reduce((acc, curr) => { return acc + Number(curr.price) },0)
-  const calcDecimal = (total: number) => Math.floor((total % 1) * 100)
+    receiptNumber: '',
+    description: '',
+    date: new Date().toDateString(),
+    items: [
+      {
+        id: 0,
+        item: '',
+        price: '',
+        itemPlaceholder: generateFakeProduct(),
+        pricePlaceholder: generateFakePrice(),
+      },
+    ],
+    totalCost: 0,
+  });
+  const sumTotals = useCallback(
+    () =>
+      formData.items.reduce((acc, curr) => {
+        return acc + Number(curr.price.replace(/,/g, ''));
+      }, 0),
+    [formData],
+  );
+  const calcDecimal = useCallback(() => Math.floor((total % 1) * 100), [total]);
   const handleAddItems = (event: React.SyntheticEvent) => {
-    event.preventDefault()
-    setFormData((ps) => ({ ...ps, items: [...ps.items, { id: formData.items.length, item: '', price: '' }]}));
+    event.preventDefault();
+    setFormData((ps) => ({
+      ...ps,
+      items: [
+        ...ps.items,
+        {
+          id: formData.items.length,
+          item: '',
+          price: '',
+          pricePlaceholder: generateFakePrice(),
+          itemPlaceholder: generateFakeProduct(),
+        },
+      ],
+    }));
   };
 
-  const handleChange = (key: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData(ps => ({...ps, [key]: event.target.value }))
-  }
+  const handleChange = useCallback(
+    (key: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      setFormData((ps) => ({ ...ps, [key]: event.target.value }));
+    },
+    [],
+  );
 
-  const handleItemChange = (key: string, id) => (event: React.ChangeEvent<HTMLInputElement>) =>  {
-      setFormData(ps => ({
-         ...ps, 
-         totalCost: total,
-         items: ps.items.map(item => item.id === id ? { ...item, [key]: event.target.value} : item) 
-        }))
-  }
+  const handleItemChange = useCallback(
+    (key: string, id) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      setFormData((ps) => ({
+        ...ps,
+        totalCost: total,
+        items: ps.items.map((item) =>
+          item.id === id ? { ...item, [key]: event.target.value } : item,
+        ),
+      }));
+    },
+    [],
+  );
 
-  const handleItemRemoval = (id: number) => () => {
-      setFormData(ps => ({ 
-          ...ps,
-          totalCost: total,
-          items: ps.items.filter(item => item.id !== id) 
-        }))
-  }
+  const handleItemRemoval = useCallback(
+    (id: number) => () => {
+      setFormData((ps) => ({
+        ...ps,
+        totalCost: total,
+        items: ps.items.filter((item) => item.id !== id),
+      }));
+    },
+    [],
+  );
+  const roundTotal = useCallback(() => Math.floor(total), [total]);
+  
+    const handleFormSubmit = useCallback(async (event: React.SyntheticEvent) => {
+      event.preventDefault()
+      const { data, error } = await supabase.from<SupabaseTypes['expenses']>('expenses').insert([{receipt_number: formData.receiptNumber, 
+        description: formData.description,
+        date: new Date().toISOString(),
+        total_cost: String(formData.totalCost),
+        user_id: userContext.id
+      }])
+      const itemData = await supabase.from<SupabaseTypes['expense_items']>('expense_items').insert(formData.items.map(item => ({ item: item.item, price: item.price, expense_id: data.id, user_id: userContext.id})))
+      if(error || itemData.error) {
+        alert(error)
+      }
+    }, [])
 
-useEffect(() => setTotal(sumTotals()), [formData])
+  useEffect(() => setTotal(sumTotals()), [formData]);
   return (
-    <StyledForm>
-      <TextInput StartIcon={BiText} label="Receipt no." value={formData.receiptNumber} onChange={handleChange('receiptNumber')} />
-      <TextInput StartIcon={BiText} label="Description (optional)" value={formData.description} onChange={handleChange('description')} />
+    <StyledForm onSubmit={handleFormSubmit}>
+      <TextInput
+        StartIcon={BiText}
+        label="Receipt no."
+        onChange={handleChange('receiptNumber')}
+      />
+      <TextInput
+        StartIcon={BiText}
+        label="Description (optional)"
+        onChange={handleChange('description')}
+      />
       <ItemContainer>
         {formData.items.map((item, index) => (
           <StyledItems key={index}>
-
             <Item>
               <TextInput
                 onChange={handleItemChange('item', item.id)}
-                value={item.item}
+                placeholder={item.itemPlaceholder}
                 StartIcon={RiShoppingBasketLine}
                 label="Item"
-                />
+              />
             </Item>
             <Price>
-              <TextInput
-                type='number'
+              <CurrencyInput
+                placeholder={item.pricePlaceholder}
                 onChange={handleItemChange('price', item.id)}
-                value={item.price}
                 StartIcon={RiPriceTag2Line}
                 width="200px"
                 label="Price"
-                />
-              {item.id > 0 && <IconButton onClick={handleItemRemoval(item.id)}><IoMdRemoveCircleOutline /></IconButton>}
+              />
+              <RemovalContainer>
+                {item.id > 0 && (
+                  <StyledIconButton onClick={handleItemRemoval(item.id)}>
+                    <IoMdRemoveCircleOutline />
+                  </StyledIconButton>
+                )}
+              </RemovalContainer>
             </Price>
-        </StyledItems>
+          </StyledItems>
         ))}
         <AddItemsBtn onClick={handleAddItems}>
           <RiShoppingBasketLine />
@@ -112,10 +189,13 @@ useEffect(() => setTotal(sumTotals()), [formData])
       <FormTotals>
         <StyledLabel>Total:</StyledLabel>
         <Total>
-        <StyledTotal total={Math.floor(total)}>$</StyledTotal>
-        <StyledDecimal total={calcDecimal(total)}>.</StyledDecimal>
+          <StyledTotal total={roundTotal()}>$</StyledTotal>
+          <StyledDecimal total={calcDecimal()}>.</StyledDecimal>
         </Total>
-    </FormTotals>
+      </FormTotals>
+      <SubmitContainer>
+        <Button onClick={handleFormSubmit} text='Submit Expense' width={300} />
+      </SubmitContainer>
     </StyledForm>
   );
-};
+});

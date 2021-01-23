@@ -85,8 +85,34 @@ export const FormTotals = styled.div`
   flex-direction: column;
 `
 export const StyledTotal = styled.h3`
-  display: flex;
-  width: 100%;
+${({ total }: {total: number}) => css`
+
+  @property --num {
+    syntax: '<integer>';
+    initial-value: 0;
+    inherits: false;
+  }
+  --num: ${total};
   font-size: 30px;
+  transition: --num 1s;
+  counter-reset: num var(--num);
+  &::after{
+    content: counter(num);
+  }`}`
+
+export const StyledItems = styled.div`
+  display: inline-flex;
+  width: 100%;
+`
+
+export const Total = styled.div`
+  display:flex;
+  flex-direction: row;
   justify-content: flex-end;
+`
+
+export const StyledDecimal = styled(StyledTotal)`
+ &::after{
+    content: counter(num, decimal-leading-zero);
+}
 `

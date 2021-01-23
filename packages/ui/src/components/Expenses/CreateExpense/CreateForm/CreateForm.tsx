@@ -6,14 +6,18 @@ import {
   Price,
   AddItemsBtn,
   StyledTotal,
-  FormTotals
+  FormTotals,
+  StyledItems,
+  StyledDecimal,
+  Total
 } from './CreateForm.styles';
 import { RiPriceTag2Line, RiShoppingBasketLine } from 'react-icons/ri';
 import { BiText } from 'react-icons/bi';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { StyledLabel } from '../../../common/TextInput/TextInput.style';
 import { IconButton } from '@material-ui/core';
 import { IoMdRemoveCircleOutline } from 'react-icons/io'
+
 interface Item {
     id: number
     item: string
@@ -43,6 +47,7 @@ export const CreateForm = () => {
       totalCost: 0
   })
   const sumTotals = () => formData.items.reduce((acc, curr) => { return acc + Number(curr.price) },0)
+  const calcDecimal = (total: number) => Math.floor((total % 1) * 100)
   const handleAddItems = (event: React.SyntheticEvent) => {
     event.preventDefault()
     setFormData((ps) => ({ ...ps, items: [...ps.items, { id: formData.items.length, item: '', price: '' }]}));
@@ -53,50 +58,39 @@ export const CreateForm = () => {
   }
 
   const handleItemChange = (key: string, id) => (event: React.ChangeEvent<HTMLInputElement>) =>  {
-      animateNumber(formData.totalCost, sumTotals())
       setFormData(ps => ({
          ...ps, 
-         totalCost: sumTotals(),
+         totalCost: total,
          items: ps.items.map(item => item.id === id ? { ...item, [key]: event.target.value} : item) 
         }))
   }
 
   const handleItemRemoval = (id: number) => () => {
-        animateNumber(formData.totalCost, sumTotals())
       setFormData(ps => ({ 
           ...ps,
-          totalCost: sumTotals(),
+          totalCost: total,
           items: ps.items.filter(item => item.id !== id) 
         }))
   }
 
-  const animateNumber = (curr, end) => {
-      if(curr <= end) {
-
-          setTimeout(() => {
-            setTotal(curr)  
-            animateNumber(curr + 1, end)           
-            //   setFormData(ps => ({...ps, totalCost: sumTotals()}))
-          },20)
-      }
-  }
-
+useEffect(() => setTotal(sumTotals()), [formData])
   return (
     <StyledForm>
       <TextInput StartIcon={BiText} label="Receipt no." value={formData.receiptNumber} onChange={handleChange('receiptNumber')} />
       <TextInput StartIcon={BiText} label="Description (optional)" value={formData.description} onChange={handleChange('description')} />
       <ItemContainer>
         {formData.items.map((item, index) => (
-          <>
-            <Item key={index}>
+          <StyledItems key={index}>
+
+            <Item>
               <TextInput
                 onChange={handleItemChange('item', item.id)}
                 value={item.item}
                 StartIcon={RiShoppingBasketLine}
                 label="Item"
-              />
+                />
             </Item>
-            <Price key={index}>
+            <Price>
               <TextInput
                 type='number'
                 onChange={handleItemChange('price', item.id)}
@@ -104,10 +98,10 @@ export const CreateForm = () => {
                 StartIcon={RiPriceTag2Line}
                 width="200px"
                 label="Price"
-              />
+                />
               {item.id > 0 && <IconButton onClick={handleItemRemoval(item.id)}><IoMdRemoveCircleOutline /></IconButton>}
             </Price>
-          </>
+        </StyledItems>
         ))}
         <AddItemsBtn onClick={handleAddItems}>
           <RiShoppingBasketLine />
@@ -117,7 +111,10 @@ export const CreateForm = () => {
 
       <FormTotals>
         <StyledLabel>Total:</StyledLabel>
-        <StyledTotal>{total}</StyledTotal>
+        <Total>
+        <StyledTotal total={Math.floor(total)}>$</StyledTotal>
+        <StyledDecimal total={calcDecimal(total)}>.</StyledDecimal>
+        </Total>
     </FormTotals>
     </StyledForm>
   );

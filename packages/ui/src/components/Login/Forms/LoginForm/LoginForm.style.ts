@@ -5,7 +5,6 @@ import styled, { css } from 'styled-components';
 export const FormContainer = styled.section`
   display: flex;
   width: 100%;
-  max-width: 600px;
   flex-direction: column;
 `;
 export const StyledForm = styled.form`

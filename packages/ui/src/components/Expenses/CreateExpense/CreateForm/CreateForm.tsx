@@ -12,7 +12,7 @@ import {
   Total,
   RemovalContainer,
   StyledIconButton,
-  SubmitContainer
+  SubmitContainer,
 } from './CreateForm.styles';
 import { RiPriceTag2Line, RiShoppingBasketLine } from 'react-icons/ri';
 import { BiText } from 'react-icons/bi';
@@ -45,9 +45,9 @@ interface CreateFormState {
 }
 export const CreateForm = memo(() => {
   const [total, setTotal] = useState<number>(0);
-  const [userContext] = useContext(AuthorizedUserContext)
-  const {addToast} = useToasts()
-  const [items] = useContext(ParsedItemsContext)
+  const [userContext] = useContext(AuthorizedUserContext);
+  const { addToast } = useToasts();
+  const [items] = useContext(ParsedItemsContext);
   const generateFakeProduct = useCallback(
     () => faker.commerce.productName(),
     [],
@@ -70,7 +70,7 @@ export const CreateForm = memo(() => {
       },
     ],
     totalCost: 0,
-  }
+  };
   const [formData, setFormData] = useState<CreateFormState>(initState);
   const sumTotals = useCallback(
     () =>
@@ -128,58 +128,72 @@ export const CreateForm = memo(() => {
     [],
   );
   const roundTotal = useCallback(() => Math.floor(total), [total]);
-  
 
-
-
-    const handleFormSubmit = useCallback(async (event: React.SyntheticEvent) => {
-      event.preventDefault()
-      const { data, error } = await supabase.from<SupabaseTypes['expenses']>('expenses').insert([{receipt_number: formData.receiptNumber, 
-        description: formData.description,
-        date: new Date().toISOString(),
-        total_cost: String(formData.totalCost),
-        user_id: userContext.id
-      }])
-      const itemData = await supabase.from<SupabaseTypes['expense_items']>('expense_items').insert(formData.items.map(item => ({ item: item.item, price: item.price, expense_id: data?.id, user_id: userContext.id})))
-      if(error || itemData.error) {
-        alert(error)
+  const handleFormSubmit = useCallback(
+    async (event: React.SyntheticEvent) => {
+      event.preventDefault();
+      const { data, error } = await supabase
+        .from<SupabaseTypes['expenses']>('expenses')
+        .insert([
+          {
+            receipt_number: formData.receiptNumber,
+            description: formData.description,
+            date: new Date().toISOString(),
+            total_cost: String(formData.totalCost),
+            user_id: userContext.id,
+          },
+        ]);
+      const itemData = await supabase
+        .from<SupabaseTypes['expense_items']>('expense_items')
+        .insert(
+          formData.items.map((item) => ({
+            item: item.item,
+            price: item.price,
+            expense_id: data?.id,
+            user_id: userContext.id,
+          })),
+        );
+      if (error || itemData.error) {
+        alert(error);
       } else {
         //reset form
-        addToast('Successfully submitted expense', { appearance: 'success'})
-        setFormData(initState)
+        addToast('Successfully submitted expense', { appearance: 'success' });
+        setFormData(initState);
       }
-      
-    }, [userContext, formData])
-
-
-
+    },
+    [userContext, formData],
+  );
 
   useEffect(() => {
-    setFormData(ps => ({ ...ps, items: [...ps.items, ...items.map((item, index) => ({
-      id: ps.items.length + index,
-      item: item.item, 
-      price: item.price,   
-      pricePlaceholder: generateFakePrice(),
-      itemPlaceholder: generateFakeProduct(), 
-    }))]}))
-  }, [items])
+    items && items.length > 0 ? 
+      setFormData((ps) => ({
+        ...ps,
+        items: [
+          ...items.map((item, index) => ({
+            id: ps.items.length + index,
+            item: item.item,
+            price: item.price,
+            pricePlaceholder: generateFakePrice(),
+            itemPlaceholder: generateFakeProduct(),
+          })),
+        ],
+      })) : null
+  }, [items]);
+
   useEffect(() => setTotal(sumTotals()), [formData]);
-
-
-
 
   return (
     <StyledForm onSubmit={handleFormSubmit}>
       <TextInput
         StartIcon={BiText}
-        defaultValue=''
+        defaultValue=""
         value={formData.receiptNumber || ''}
         label="Receipt no."
         onChange={handleChange('receiptNumber')}
       />
       <TextInput
-         defaultValue=''
-         value={formData.description || ''}
+        defaultValue=""
+        value={formData.description || ''}
         StartIcon={BiText}
         label="Description (optional)"
         onChange={handleChange('description')}
@@ -189,7 +203,7 @@ export const CreateForm = memo(() => {
           <StyledItems key={index}>
             <Item>
               <TextInput
-                defaultValue=''
+                defaultValue=""
                 value={item.item || ''}
                 onChange={handleItemChange('item', item.id)}
                 placeholder={item.itemPlaceholder}
@@ -199,7 +213,7 @@ export const CreateForm = memo(() => {
             </Item>
             <Price>
               <CurrencyInput
-                defaultValue=''
+                defaultValue=""
                 value={item.price || ''}
                 placeholder={item.pricePlaceholder}
                 onChange={handleItemChange('price', item.id)}
@@ -231,7 +245,7 @@ export const CreateForm = memo(() => {
         </Total>
       </FormTotals>
       <SubmitContainer>
-        <Button onClick={handleFormSubmit} text='Submit Expense' width={300} />
+        <Button onClick={handleFormSubmit} text="Submit Expense" width={300} />
       </SubmitContainer>
     </StyledForm>
   );

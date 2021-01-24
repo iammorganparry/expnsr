@@ -10,9 +10,9 @@ export const Avatar = (props: Avatar) => {
   return (
     <AvatarContainer>
       <MaterialAvatar
-          src={user?.user_metadata?.avatar_url || faker.image.avatar}
-           {...props}>
-      </MaterialAvatar>
+        src={user?.user_metadata?.avatar_url || faker.image.avatar}
+        {...props}
+      ></MaterialAvatar>
     </AvatarContainer>
   );
 };

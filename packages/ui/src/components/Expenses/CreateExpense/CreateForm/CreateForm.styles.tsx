@@ -20,8 +20,8 @@ export const ItemContainer = styled.ul`
     overflow-x: hidden;
     overflow-y: scroll;
     justify-content: center;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
     padding-right: 190px;
     box-sizing: content-box; /* So the width will be 100% + 17px */
   `}
@@ -146,5 +146,5 @@ export const SubmitContainer = styled.div`
   display: flex;
   width: 100%;
   align-items: center;
-  justify-content:center;
-`
+  justify-content: center;
+`;

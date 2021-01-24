@@ -1,44 +1,49 @@
-import { Dialog, DialogContentText, LinearProgress, DialogContent } from "@material-ui/core";
-import styled, { css, keyframes } from "styled-components";
+import {
+  Dialog,
+  DialogContentText,
+  LinearProgress,
+  DialogContent,
+} from '@material-ui/core';
+import styled, { css, keyframes } from 'styled-components';
 
 export const ImageContainer = styled.div`
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    align-items: center;   
-`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+`;
 
 export const StyledLinearProgress = styled(LinearProgress)`
-    ${({ theme }) => css`
-        height: 20px;
-        background: ${theme.palette.grey[200]};
-        border-radius: 10px;
-        margin-bottom: ${theme.spacing(2)};
-    `}
-`
+  ${({ theme }) => css`
+    height: 20px;
+    background: ${theme.palette.grey[200]};
+    border-radius: 10px;
+    margin-bottom: ${theme.spacing(2)};
+  `}
+`;
 
 export const StyledDialog = styled(Dialog)`
-    ${({ theme }) => css`
-        .MuiPaper-root {
-            min-width: 600px;
-            min-height: 350px;
-            border-radius: 25px;
-        }
-    `}
-`
+  ${({ theme }) => css`
+    .MuiPaper-root {
+      min-width: 600px;
+      min-height: 350px;
+      border-radius: 25px;
+    }
+  `}
+`;
 
 export const StyledDialogContent = styled(DialogContent)`
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+`;
 export const StyledTextContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: center;
-    justify-content: center;
-`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+`;
 const dotElasticBefore = keyframes`
 0% {
   transform: scale(1, 1);
@@ -55,9 +60,9 @@ const dotElasticBefore = keyframes`
 100% {
   transform: scale(1, 1);
     }
-`
-  
- const dotElastic = keyframes`
+`;
+
+const dotElastic = keyframes`
  
  0% {
    transform: scale(1, 1);
@@ -74,8 +79,8 @@ const dotElasticBefore = keyframes`
  100% {
    transform: scale(1, 1);
  }
- `
-  
+ `;
+
 const dotElasticAfter = keyframes`
 
     0% {
@@ -93,10 +98,10 @@ const dotElasticAfter = keyframes`
     100% {
       transform: scale(1, 1);
     }
-`
+`;
 export const AnimatedDots = styled.div`
- /* background-color: #9880ff; */
- ${({ theme }) => css`
+  /* background-color: #9880ff; */
+  ${({ theme }) => css`
  position: relative;
   width: 5px;
   height: 5px;
@@ -132,5 +137,4 @@ export const AnimatedDots = styled.div`
 }
 
  `}
-` 
-  
+`;

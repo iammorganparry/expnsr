@@ -21,13 +21,13 @@ export default function MyApp({ Component, pageProps }) {
           <AuthorizedUserProvider>
             <ToastProvider autoDismiss placement="top-center">
               <StyledFullPageContainer>
-              <ParsedItemsContextProvider>
-                {isLoggedIn ? (
-                  <Component {...pageProps} />
-                ) : (
-                  <Login {...pageProps} />
-                )}
-              </ParsedItemsContextProvider>
+                <ParsedItemsContextProvider>
+                  {isLoggedIn ? (
+                    <Component {...pageProps} />
+                  ) : (
+                    <Login {...pageProps} />
+                  )}
+                </ParsedItemsContextProvider>
               </StyledFullPageContainer>
             </ToastProvider>
           </AuthorizedUserProvider>

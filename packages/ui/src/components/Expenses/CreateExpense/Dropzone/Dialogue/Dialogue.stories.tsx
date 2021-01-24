@@ -17,5 +17,5 @@ const Template: Story<ComponentProps<typeof Dialogue>> = (args) => (
 
 export const Open = Template.bind({});
 Open.args = {
-    open: true
+  open: true,
 };

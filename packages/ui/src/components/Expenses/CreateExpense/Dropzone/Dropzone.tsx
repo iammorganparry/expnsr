@@ -28,7 +28,7 @@ export const Dropzone = () => {
           <p>Drag 'n' drop some reciept here, or click to select reciept</p>
         )}
       </StyledDropzone>
-      <ImageCrop open={showImageDialogue} closeFn={setShowImageDialogue} image={image} />
+      {image && <ImageCrop open={showImageDialogue} closeFn={setShowImageDialogue} image={image} />}
     </>
   );
 };

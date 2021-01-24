@@ -39,10 +39,17 @@ export const ImageCrop = ({ image, open, closeFn }: ImageCropProps) => {
   const makeClientCrop = async (crop: CropObj) => {
     if (ref.current && crop.width && crop.height) {
       const croppedImg  = await getCroppedImg(ref.current, crop);
-      setCanvas(croppedImg)
-      closeFn(false)
-    }
+      await initCanvas(croppedImg)
+    //   setCanvas(croppedImg)
+        setCrop({})
+        closeFn(false)
+}
   };
+
+  const initCanvas = (image: Blob) => new Promise(resolve => setTimeout(() => {
+      setCanvas(image)
+      resolve(true)
+  }, 500))
 
   const getCroppedImg = (
     image: HTMLImageElement,
@@ -99,16 +106,19 @@ export const ImageCrop = ({ image, open, closeFn }: ImageCropProps) => {
           onChange={handleCropChange}
         />
       </Dialog>
-      {canvas && <TesseractComponent image={canvas} /> }
+      {canvas && <TesseractComponent setter={setCanvas} image={canvas} /> }
     </>
   );
 };
 
 interface TesseractProps {
     image: Blob
+    setter: React.Dispatch<React.SetStateAction<Blob>>
 }
-const TesseractComponent = ({ image }: TesseractProps) => {
-    const { showDialogue, tesseractState } = useTesseract(image)
+const TesseractComponent = ({ image, setter }: TesseractProps) => {
+    const { showDialogue, tesseractState } = useTesseract(image, () => {
+        setter(null)
+    })
     return (
         <Dialogue
         progress={

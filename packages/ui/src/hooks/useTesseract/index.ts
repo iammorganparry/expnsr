@@ -11,7 +11,7 @@ interface TesseractResponseObject {
     progress: number;
   }
 
-export const useTesseract = (image: Blob) => {
+export const useTesseract = (image: Blob, cb: () => void) => {
     const [showDialogue, setShowDialogue] = useState<boolean>(false)
     const [tesseractState, setTerreractState] = useState<TesseractResponseObject | null>(null);
     const [,setItems] = useContext(ParsedItemsContext);
@@ -28,6 +28,7 @@ export const useTesseract = (image: Blob) => {
         console.log(text);
         const items = new ImageParser(text).parseItems();
         setItems(items);
+        cb();
     }, [])
 
 

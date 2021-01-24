@@ -165,7 +165,7 @@ export const CreateForm = memo(() => {
   );
 
   useEffect(() => {
-    items && items.length > 0 ? 
+    items && items.length < 1 ? 
       setFormData((ps) => ({
         ...ps,
         items: [
@@ -177,7 +177,20 @@ export const CreateForm = memo(() => {
             itemPlaceholder: generateFakeProduct(),
           })),
         ],
-      })) : null
+      })) : 
+      setFormData((ps) => ({
+        ...ps,
+        items: [
+          ...ps.items,
+          ...items.map((item, index) => ({
+            id: ps.items.length + index,
+            item: item.item,
+            price: item.price,
+            pricePlaceholder: generateFakePrice(),
+            itemPlaceholder: generateFakeProduct(),
+          })),
+        ],
+      }))
   }, [items]);
 
   useEffect(() => setTotal(sumTotals()), [formData]);

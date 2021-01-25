@@ -5,6 +5,7 @@ import { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'r
 import ReactCrop from 'react-image-crop';
 import Tesseract, { ImageLike } from 'tesseract.js';
 import { Dialogue } from '../Dialogue/Dialogue';
+import { StyledDialog } from './ImageCrop.styles';
 
 interface CropObj {
   aspect?: number;
@@ -96,7 +97,7 @@ export const ImageCrop = ({ image, open, closeFn }: ImageCropProps) => {
 
   return (
     <>
-      <Dialog open={open}>
+      <StyledDialog maxWidth='md' open={open}>
         <ReactCrop
           ruleOfThirds
           src={image}
@@ -105,7 +106,7 @@ export const ImageCrop = ({ image, open, closeFn }: ImageCropProps) => {
           onComplete={handleCropComplete}
           onChange={handleCropChange}
         />
-      </Dialog>
+      </StyledDialog>
       {canvas && <TesseractComponent setter={setCanvas} image={canvas} /> }
     </>
   );

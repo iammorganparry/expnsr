@@ -23,6 +23,7 @@ export const StyledLinearProgress = styled(LinearProgress)`
 `;
 
 export const StyledDialog = styled(Dialog)`
+  -webkit-app-region: no-drag;
   ${({ theme }) => css`
     .MuiPaper-root {
       min-width: 600px;

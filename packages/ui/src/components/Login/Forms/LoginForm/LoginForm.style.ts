@@ -6,6 +6,8 @@ export const FormContainer = styled.section`
   display: flex;
   width: 100%;
   flex-direction: column;
+  overflow-y: scroll;
+  overflow-x: hidden;
 `;
 export const StyledForm = styled.form`
   display: flex;

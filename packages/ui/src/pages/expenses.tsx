@@ -5,6 +5,7 @@ import { Header } from '@/components/Layout/Header/Header';
 import { Layout } from '@/components/Layout/Layout';
 import { useIsLoggedIn } from '@/hooks/useIsLoggedIn';
 import Head from 'next/head';
+import Link from 'next/link';
 
 export default function Home() {
   const isLoggedIn = useIsLoggedIn();
@@ -12,6 +13,7 @@ export default function Home() {
     <Layout>
       <Header title="Expenses" />
       {/* <CreateExpense /> */}
+      <Link href='/expenses/create'>Create</Link>
     </Layout>
   );
 }
